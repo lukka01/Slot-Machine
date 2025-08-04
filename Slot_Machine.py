@@ -43,7 +43,6 @@ def get_bet():
             print("Please enter a valid amount.")
 
 
-
 def main():
 
     balance = deposit()
