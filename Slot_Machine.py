@@ -1,3 +1,5 @@
+import random
+
 MAX_LINES = 3
 MAX_BET = 100
 MIN_BET = 1
@@ -5,7 +7,7 @@ MIN_BET = 1
 ROWS = 3
 COLS = 3
 
-symbol_count = {
+symbols_count = {
     "A": 2,
     "B": 4,
     "C": 6,
@@ -18,9 +20,9 @@ def get_slot_machine_spin(rows, cols, symbols):
         for _ in range(symbol_count):
             all_symbols.append(symbol)
 
-    columns = [ [], [], [] ]
+    columns = []
 
-    for col in range(cols):
+    for _ in range(cols):
         column = []
         current_symbols = all_symbols[:]
         for _ in range(rows):
@@ -28,18 +30,21 @@ def get_slot_machine_spin(rows, cols, symbols):
             current_symbols.remove(value)
             column.append(value)
 
-        columns.append(column)
+        columns.append(column)  # This is correct now
 
     return columns
 
+
 def print_slot_machine(columns):
-    for row in range(columns[0]):
+    for row in range(len(columns[0])):
         for i, column in enumerate(columns):
-            print(column[row])
             if i != len(columns) - 1:
-                print(column[row], '|')
+                print(column[row], end = '|')
             else:
-                print(column[row])
+                print(column[row],  end = "")
+        print()
+
+
 
 
 def deposit():
@@ -97,6 +102,9 @@ def main():
             break
 
     print(f"You have bet {bet} on {lines} lines. Total bet - ${total_bet} ")
+
+    slots = get_slot_machine_spin(ROWS,COLS,symbols_count)
+    print_slot_machine(slots)
 
 if __name__ == '__main__':
     main()
